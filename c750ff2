@@ -1,0 +1,7 @@
+[33m2d82a78[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m Delete src/services directory
+[33mc750ff2[m Add all project files
+[33m0f4e9d0[m Update onboarding guide, semester filter, templates, back button
+[33mc289f69[m Add onboarding templates + download buttons
+[33mf5e77bd[m Fix navbar build error
+[33ma45736d[m Add Vercel routing
+[33m0e4091f[m Faculty System
