@@ -20,7 +20,10 @@ const CONTENT = {
         'Coursera component details',
         'Plagiarism & AI use requirements stated',
       ],
-      buttons: [{ icon: '📄', label: 'Download Template: Course Guide' }],
+            buttons: [
+        { icon: '📄', label: 'Download Template: Course Guide', href: '/templates/UNIMY-Lesson-Plan.docx' },
+        { icon: '📽️', label: 'Download PPT Template (UNIMY)', href: '/templates/PPT-UNIMY-TEMPLATE.pdf' },
+      ],
     },
     {
       color: '#f59e0b',
@@ -33,10 +36,10 @@ const CONTENT = {
         'Practice Questions uploaded',
         "Coursework's Assignment uploaded",
         'Additional Resources uploaded',
-        { text: 'Coursera Links active and verified', action: 'Share link: Coursera for Course Builder' },
+        { text: 'Coursera Links active and verified', },
       ],
       alerts: [
-        { type: 'yellow', title: 'AUDIT CHECK', text: 'The HOP will submit a status update on all courses to the Dean before classes start (prior to Week 1). The Dean will report to the Dean of Academic Affairs by Week 1. By Week 3, if the required upload has not been submitted, the Dean will issue a show-cause letter, followed by a warning letter from HR.' },
+        { type: 'red', title: 'AUDIT CHECK', text: 'The HOP will submit a status update on all courses to the Dean before classes start (prior to Week 1). The Dean will report to the Dean of Academic Affairs by Week 1. By Week 3, if the required upload has not been submitted, the Dean will issue a show-cause letter, followed by a warning letter from HR.' },
       ],
     },
   ],
@@ -47,17 +50,20 @@ const CONTENT = {
       title: 'Class Delivery & Attendance',
       checklist: [
         'Brief students on Unit Guide during Week 1',
-        { text: 'Record all classes via Panopto', action: 'Share Video - How to use Panopto' },
-        { text: 'Log student attendance for every scheduled session', action: 'Share Video on Class Reschedule' },
+        { text: 'Record all classes via Panopto', },
+        { text: 'Log student attendance for every scheduled session', },
+      ],
+      buttons: [
+        { icon: '🎥', label: 'Open Panopto Guide', href: '/templates/Panopto-Guide.pdf', open: true },
       ],
       alerts: [
         { type: 'yellow', title: 'STRICT NO CANCELLATION POLICY', text: 'All classes must be conducted as scheduled. If you are on MC or EL, you MUST notify the Dean or HOP the night before or before the class begins so that a substitute lecturer or alternative learning activity can be arranged. The HOP or substitute lecturer must attend the class, inform the students, and record their attendance.' },
-        { type: 'red', title: 'FLOOR WALK AUDIT', text: 'Conduct floor walk audits daily at random times. Any unnotified absences will be reported directly to DVC and CTO. Deans will issue show-cause letters for recurring or persistent cases of absenteeism, followed by a warning letter from HR.' },
+        { type: 'red', title: 'AUDIT CHECK', text: 'Conduct floor walk audits daily at random times. Any unnotified absences will be reported directly to DVC and CTO. Deans will issue show-cause letters for recurring or persistent cases of absenteeism, followed by a warning letter from HR.' },
       ],
     },
     {
       color: '#8b5cf6',
-      badge: 'Due: Week 10',
+      badge: 'Due: Week 7',
       title: 'Final Examination Vetting and Submission',
       checklist: [
         { text: 'Prepare and submit the final examination documents, including:', sub: ['Question Papers (Set A and Set B)', 'Answer Schemes / Marking Rubrics', 'Table of Specifications (TOS)', 'Examination Vetting Forms', 'All documents must be submitted through Campus One within the stipulated deadline.'] },
@@ -65,7 +71,7 @@ const CONTENT = {
         { text: 'Submit Final Corrected Version', sub: ['Upload the revised and approved examination papers and supporting documents to Campus One.', 'Ensure all required approvals are obtained before final submission.'] },
       ],
       alerts: [
-        { type: 'yellow', title: 'AUDIT CHECK', text: 'Failure to submit complete examination documents or comply with the vetting requirements may result in delays to examination approval and administration. All outstanding examination submissions will be reported by the Examination Unit to the Dean of Academic Affairs (DOA), and the responsible staff may be required to provide a written explanation through a show-cause letter issued by the DOA.' },
+        { type: 'red', title: 'AUDIT CHECK', text: 'Failure to submit complete examination documents or comply with the vetting requirements may result in delays to examination approval and administration. All outstanding examination submissions will be reported by the Examination Unit to the Dean of Academic Affairs (DOA), and the responsible staff may be required to provide a written explanation through a show-cause letter issued by the DOA.' },
       ],
     },
     {
@@ -73,10 +79,10 @@ const CONTENT = {
       badge: 'Due: Week 12',
       title: 'Coursework Marks Release and Feedback',
       checklist: [
-        'Mark, discuss, and provide CW feedback to students',
-        'Lecturer to submit ALL CW marks in CampusOne',
-        'Dean to release the Coursework marks in Campus One',
-        'Release CW marks to students via CampusOne by Week 12 by the Dean',
+        'Mark, discuss, and provide Coursework feedback to students',
+        'Lecturer to submit ALL Coursework marks in CampusOne / LMS GradeBook',
+        'Dean / HOP to approve and release the Coursework marks in CampusOne',
+        'Lecturer release Coursework marks to students via CampusOne / LMS Gradebook by Week 12',
       ],
       alerts: [
         { type: 'yellow', title: 'CLASS COMPLIANCE REQUIREMENT', text: "Week 1-14: All teaching and learning delivery, including revision classes, shall be completed within this period. All coursework assessments, class activities, and feedback loops must be finalized by the end of Week 14. Week 15: Study Week - reserved for students' examination preparation. Only academic consultations may be conducted. No classes, presentations, assessments, or other teaching and learning activities are permitted." },
@@ -90,7 +96,7 @@ const CONTENT = {
       badge: 'Due: Week 17',
       title: 'Final Marks & School Meeting',
       checklist: [
-        'Release CW marks to students via CampusOne by Week 13',
+        'Final Exams marking and moderation.',
         'School Meeting: Discuss student status, review updates to Table 4, and address any Teaching and Learning-related matters, issues, or updates',
       ],
     },
@@ -100,12 +106,12 @@ const CONTENT = {
       title: 'CQI & Digital Course File (DCF)',
       desc: 'Closing the academic loop is mandatory for MQA compliance.',
       checklist: [
-        { text: 'Generate CLO / PLO attainment analysis', action: 'Share Template' },
-        { text: 'CQI (Continuous Quality Improvement) report', action: 'Share Template' },
-        { text: 'Compile and upload all artifacts to the Digital Course File (DCF)', action: 'Share Template' },
+        { text: 'Generate CLO / PLO attainment analysis', },
+        { text: 'CQI (Continuous Quality Improvement) report',},
+        { text: 'Compile and upload all artifacts to the Digital Course File (DCF)',},
       ],
       alerts: [
-        { type: 'yellow', title: 'AUDIT CHECK', text: 'The Dean will report to the Dean of Academic Affairs by Week 18. If the coursework marks are not submitted by Week 18, the Dean will issue a show-cause letter, followed by a warning letter from HR.' },
+        { type: 'red', title: 'AUDIT CHECK', text: 'The Dean will report to the Dean of Academic Affairs by Week 18. If the coursework marks are not submitted by Week 18, the Dean will issue a show-cause letter, followed by a warning letter from HR.' },
       ],
     },
   ],
@@ -122,6 +128,7 @@ function CheckItem({ item, onAction }) {
   const text = typeof item === 'string' ? item : item.text
   const sub = typeof item === 'string' ? null : item.sub
   const action = typeof item === 'string' ? null : item.action
+  const href = typeof item === 'string' ? null : item.href
 
   return (
     <div style={{ display: 'flex', gap: '10px', alignItems: 'flex-start', marginBottom: '12px' }}>
@@ -135,10 +142,16 @@ function CheckItem({ item, onAction }) {
             ))}
           </ul>
         )}
-        {action && (
-          <button onClick={() => onAction(action)} style={{ display: 'inline-block', marginTop: '6px', background: 'none', border: 'none', color: '#2563eb', fontSize: '13px', fontWeight: '600', cursor: 'pointer', textDecoration: 'underline', padding: 0 }}>
-            🔗 {action}
-          </button>
+               {action && (
+          href ? (
+            <a href={href} target="_blank" rel="noopener noreferrer" style={{ display: 'inline-block', marginTop: '6px', color: '#2563eb', fontSize: '13px', fontWeight: '600', cursor: 'pointer', textDecoration: 'underline' }}>
+              🔗 {action}
+            </a>
+          ) : (
+            <button onClick={() => onAction(action)} style={{ display: 'inline-block', marginTop: '6px', background: 'none', border: 'none', color: '#2563eb', fontSize: '13px', fontWeight: '600', cursor: 'pointer', textDecoration: 'underline', padding: 0 }}>
+              🔗 {action}
+            </button>
+          )
         )}
       </div>
     </div>
@@ -188,11 +201,24 @@ export default function OnboardingGuide() {
                 </div>
               ))}
 
-              {card.buttons && card.buttons.map((b, m) => (
-                <button key={m} onClick={() => notify('📎 ' + b.label + ' - will be provided by your faculty office')} style={{ width: '100%', marginTop: '10px', padding: '12px', background: '#eef2f7', border: '1px solid #dbe3ee', borderRadius: '8px', fontSize: '14px', fontWeight: '600', color: '#1e3a8a', cursor: 'pointer' }}>
-                  {b.icon} {b.label}
-                </button>
-              ))}
+                            {card.buttons && card.buttons.map((b, m) =>
+                b.href ? (
+                  <a
+                    key={m}
+                    href={b.href}
+                    download={!b.open}
+                    target={b.open ? '_blank' : undefined}
+                    rel={b.open ? 'noopener noreferrer' : undefined}
+                    style={{ display: 'block', width: '100%', marginTop: '10px', padding: '12px', background: '#eef2f7', border: '1px solid #dbe3ee', borderRadius: '8px', fontSize: '14px', fontWeight: '600', color: '#1e3a8a', cursor: 'pointer', textAlign: 'center', textDecoration: 'none', boxSizing: 'border-box' }}
+                  >
+                    {b.icon} {b.label}
+                  </a>
+                ) : (
+                  <button key={m} onClick={() => notify('📎 ' + b.label + ' - will be provided by your faculty office')} style={{ width: '100%', marginTop: '10px', padding: '12px', background: '#eef2f7', border: '1px solid #dbe3ee', borderRadius: '8px', fontSize: '14px', fontWeight: '600', color: '#1e3a8a', cursor: 'pointer' }}>
+                    {b.icon} {b.label}
+                  </button>
+                )
+              )}
             </div>
           ))}
         </div>
