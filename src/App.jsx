@@ -11,6 +11,7 @@ import Logs from './pages/Logs'
 import ProfileGate from './components/ProfileGate'
 import Users from './pages/Users'
 import OnboardingGuide from './pages/OnboardingGuide'
+import Cqi from './pages/Cqi'
 
 function Guard({ path, children }) {
   const { profile } = useAuth()
@@ -54,6 +55,7 @@ function Shell() {
           <Route path="/logs" element={<Guard path="/logs"><Logs /></Guard>} />
           <Route path="/users" element={<Guard path="/users"><Users /></Guard>} />
           <Route path="/onboarding" element={<Guard path="/onboarding"><OnboardingGuide /></Guard>} />
+          <Route path="/cqi" element={<Guard path="/cqi"><Cqi /></Guard>} />
         </Routes>
       </div>
     </div>

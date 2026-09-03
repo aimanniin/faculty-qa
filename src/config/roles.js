@@ -1,18 +1,20 @@
 export const NAV_ITEMS = [
-  { to: '/', label: '📊 Dashboard', roles: ['admin', 'vc', 'hod', 'lecturer'] },
-  { to: '/onboarding', label: '📘 Onboarding Guide', roles: ['lecturer'] },   // ← ADD
+  { to: '/', label: '📊 Dashboard', roles: ['vc', 'hod', 'lecturer'] },
+  { to: '/onboarding', label: '📘 Onboarding Guide', roles: ['lecturer'] }, 
   { to: '/lecturers', label: '👥 Lecturers', roles: ['admin', 'vc', 'hod'] },
-  { to: '/entry', label: '📝 Data Entry', roles: ['admin', 'vc', 'hod', 'lecturer'] },
+  { to: '/entry', label: '📝 Semester Checklist', roles: ['vc', 'hod', 'lecturer'] },
+  { to: '/cqi', label: '📈 CQI Evaluation', roles: ['vc', 'hod', 'lecturer'] }, 
   { to: '/approvals', label: '🛡️ Approvals', roles: ['admin', 'vc'] },
   { to: '/users', label: '👤 Users', roles: ['admin'] },
   { to: '/logs', label: '📜 Logs', roles: ['admin'] },
 ]
 
 export const PAGE_ACCESS = {
-  '/': ['admin', 'vc', 'hod', 'lecturer'],
+  '/': ['vc', 'hod', 'lecturer'],
   '/onboarding': ['lecturer'],   // ← ADD
   '/lecturers': ['admin', 'vc', 'hod'],
-  '/entry': ['admin', 'vc', 'hod', 'lecturer'],
+  '/entry': ['vc', 'hod', 'lecturer'],
+  '/cqi': ['vc', 'hod', 'lecturer'],
   '/approvals': ['admin', 'vc'],
   '/users': ['admin'],
   '/logs': ['admin'],
