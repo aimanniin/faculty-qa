@@ -1,7 +1,6 @@
 import { db } from '../firebase'
 import { collection, addDoc, getDocs, query, orderBy, limit } from 'firebase/firestore'
 
-// Record an activity
 export async function logActivity(performedBy, action, details = {}) {
   try {
     await addDoc(collection(db, 'activity_logs'), {
@@ -17,7 +16,6 @@ export async function logActivity(performedBy, action, details = {}) {
   }
 }
 
-// Get recent logs
 export async function getLogs(count = 200) {
   try {
     const q = query(collection(db, 'activity_logs'), orderBy('timestamp', 'desc'), limit(count))
