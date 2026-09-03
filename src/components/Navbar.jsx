@@ -1,7 +1,7 @@
 import { Link, useLocation } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
-import { NAV_ITEMS, ROLE_LABELS } from '../config/roles'
 import { logActivity } from '../services/logService'
+import { NAV_ITEMS, ROLE_LABELS } from '../config/roles'
 
 export default function Navbar() {
 
