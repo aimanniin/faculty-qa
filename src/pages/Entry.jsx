@@ -4,6 +4,7 @@ import { getAllLecturers } from '../services/lecturerService'
 import { getEntry } from '../services/entryService'
 import { logActivity } from '../services/logService'
 import EntryForm from '../components/EntryForm'
+import { getCurrentSemester } from '../utils/semester'
 
 const FACULTIES = [
   { code: 'SOCDT', name: 'School of Computing & Digital Technology', icon: '💻', color: '#3b82f6' },
@@ -24,6 +25,7 @@ export default function Entry() {
   const [lecturers, setLecturers] = useState([])
   const [loading, setLoading] = useState(true)
   const [loadError, setLoadError] = useState(null)
+  const semesterFilter = getCurrentSemester()
 
   const [selectedFaculty, setSelectedFaculty] = useState(null)
   const [selectedLecturer, setSelectedLecturer] = useState(null)
@@ -48,7 +50,7 @@ export default function Entry() {
   const openCourse = async (course, lecturer) => {
     const lec = lecturer || selectedLecturer
     setSelectedCourse(course)
-    const result = await getEntry(lec.staffId || lec.id, course.code, course.semester || 'Feb')
+        const result = await getEntry(lec.staffId || lec.id, course.code, semesterFilter)
     setExistingEntry(result.success ? result.data : null)
     setLevel(4)
   }
@@ -74,7 +76,8 @@ export default function Entry() {
       if (me) {
         setSelectedLecturer(me)
         setSelectedFaculty(getFaculty(me.department))
-        if ((me.subjects || []).length === 1) openCourse(me.subjects[0], me)
+        const mine = (me.subjects || []).filter((s) => s.semester === semesterFilter)
+        if (mine.length === 1) openCourse(mine[0], me)
         else setLevel(3)
       }
     }
@@ -129,6 +132,31 @@ export default function Entry() {
             )}
           </span>
         ))}
+      </div>
+
+           {/* Semester (auto-locked to current) */}
+      <div style={{ display: 'flex', gap: '8px', alignItems: 'center', marginBottom: '16px', flexWrap: 'wrap' }}>
+        <span style={{ fontSize: '13px', fontWeight: '600', color: '#6b7280' }}>Semester:</span>
+        {['Feb', 'May', 'Sep'].map((s) => {
+          const isCurrent = s === getCurrentSemester()
+          return (
+            <button
+              key={s}
+              disabled={!isCurrent}
+              style={{
+                padding: '7px 16px', borderRadius: '20px', fontSize: '13px', fontWeight: '600',
+                border: '1px solid ' + (isCurrent ? '#2563eb' : '#e5e7eb'),
+                background: isCurrent ? '#2563eb' : '#f3f4f6',
+                color: isCurrent ? '#fff' : '#9ca3af',
+                cursor: isCurrent ? 'default' : 'not-allowed',
+                opacity: isCurrent ? 1 : 0.6,
+              }}
+            >
+              {s}
+              {isCurrent && <span style={{ fontSize: '10px', marginLeft: '4px', opacity: 0.85 }}>(Current)</span>}
+            </button>
+          )
+        })}
       </div>
 
       {/* ===== LEVEL 1: FACULTY ===== */}
@@ -211,15 +239,26 @@ export default function Entry() {
         </div>
       )}
 
-      {/* ===== LEVEL 3: COURSE ===== */}
+          {/* ===== LEVEL 3: COURSE ===== */}
       {level === 3 && (
         <div>
           {!isLecturer && <button onClick={() => setLevel(2)} style={backBtn}>← Back to Lecturers</button>}
           <h1 style={{ fontSize: '22px', fontWeight: '700', margin: '0 0 20px' }}>
             📚 Select Course for {selectedLecturer?.name}
           </h1>
+
+          {/* Empty state: no courses in the selected semester */}
+          {((selectedLecturer?.subjects || []).filter((c) => c.semester === semesterFilter)).length === 0 && (
+            <div style={{ textAlign: 'center', padding: '40px', background: '#fff', borderRadius: '12px', border: '1px solid #e5e7eb', marginBottom: '16px' }}>
+              <div style={{ fontSize: '40px', marginBottom: '10px' }}>📅</div>
+              <p style={{ color: '#6b7280' }}>
+                No courses for {selectedLecturer?.name} in the {semesterFilter} semester. Switch semester above.
+              </p>
+            </div>
+          )}
+
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(250px, 1fr))', gap: '14px' }}>
-            {(selectedLecturer?.subjects || []).map((course) => (
+            {(selectedLecturer?.subjects || []).filter((c) => c.semester === semesterFilter).map((course) => (
               <div key={course.code} onClick={() => openCourse(course)} style={{
                 background: '#fff', borderRadius: '10px', padding: '20px', textAlign: 'center',
                 cursor: 'pointer', border: '2px solid transparent', boxShadow: '0 1px 3px rgba(0,0,0,0.08)', transition: 'all .2s',
@@ -241,7 +280,7 @@ export default function Entry() {
       {/* ===== LEVEL 4: FORM ===== */}
       {level === 4 && selectedCourse && (
         <div>
-          {!isLecturer && <button onClick={() => setLevel(3)} style={backBtn}>← Back to Courses</button>}
+         <button onClick={() => setLevel(3)} style={backBtn}>← Back to Courses</button>
           <EntryForm
             lecturer={selectedLecturer}
             course={selectedCourse}

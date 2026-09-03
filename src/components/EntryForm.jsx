@@ -6,7 +6,7 @@ const STATUS_OPTIONS_TEACHING = ['Completed', 'In Progress', 'Not Started']
 const ASSESSMENT_TYPES = ['Quiz', 'Test', 'Midterm', 'Assignment', 'Lab', 'Project']
 
 export default function EntryForm({ lecturer, course, faculty, existingEntry, onSaved }) {
-  const [semester, setSemester] = useState(course.semester || 'Feb')
+  const semester = course.semester || 'Feb'
   const [saving, setSaving] = useState(false)
   const [toast, setToast] = useState(null)
 
@@ -378,11 +378,6 @@ export default function EntryForm({ lecturer, course, faculty, existingEntry, on
           Progress: <strong style={{ color: faculty.color }}>{progress}%</strong> complete
         </div>
         <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
-          <select value={semester} onChange={(e) => setSemester(e.target.value)} style={{ padding: '9px 12px', border: '1px solid #d1d5db', borderRadius: '6px', fontSize: '13px' }}>
-            <option value="Feb">Feb Semester</option>
-            <option value="May">May Semester</option>
-            <option value="Sep">Sep Semester</option>
-          </select>
           <button onClick={handleReset} style={{ padding: '10px 18px', background: '#fff', border: '1px solid #d1d5db', borderRadius: '6px', fontSize: '13px', cursor: 'pointer' }}>
             ↻ Reset
           </button>
