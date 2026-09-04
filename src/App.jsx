@@ -45,7 +45,7 @@ function Shell() {
   return (
     <ProfileGate>
     <div style={{ minHeight: '100vh', background: '#f0f2f5' }}>
-      <Navbar />7
+      <Navbar />
       <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '24px' }}>
         <Routes>
           <Route path="/" element={<Guard path="/"><Dashboard /></Guard>} />

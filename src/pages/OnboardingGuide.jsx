@@ -22,7 +22,6 @@ const CONTENT = {
       ],
       buttons: [
         { icon: '📄', label: 'Download Template: Course Guide', href: '/templates/UNIMY-Lesson-Plan.docx' },
-        { icon: '📽️', label: 'Download PPT Template (UNIMY)', href: '/templates/PPT-UNIMY-TEMPLATE.pdf' },
       ],
     },
     {
@@ -37,6 +36,9 @@ const CONTENT = {
         "Coursework's Assignment uploaded",
         'Additional Resources uploaded',
         { text: 'Coursera Links active and verified' },
+      ],
+      buttons: [
+        { icon: '📽️', label: 'Download PPT Template (UNIMY)', href: '/templates/PPT-UNIMY-TEMPLATE.pdf' },
       ],
       alerts: [
         {

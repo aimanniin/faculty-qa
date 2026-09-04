@@ -5,6 +5,7 @@ import { getCqi, saveCqi } from '../services/cqiService'
 import { getEntry, calculateCompletion } from '../services/entryService'
 import { getCurrentSemester } from '../utils/semester'
 import { logActivity } from '../services/logService'
+import LessonPlanForm, { defaultLessonPlan } from '../components/LessonPlanForm'
 
 const FACULTIES = [
   { code: 'SOCDT', name: 'School of Computing & Digital Technology', icon: '💻', color: '#3b82f6' },
@@ -74,7 +75,6 @@ export default function Cqi() {
 
   return (
     <div>
-      {/* Semester badge */}
       <div style={{ display: 'flex', gap: '8px', alignItems: 'center', marginBottom: '16px' }}>
         <span style={{ fontSize: '13px', fontWeight: '600', color: '#6b7280' }}>Semester:</span>
         <span style={{ padding: '7px 16px', borderRadius: '20px', background: '#2563eb', color: '#fff', fontSize: '13px', fontWeight: '600' }}>
@@ -146,6 +146,9 @@ export default function Cqi() {
 }
 
 function CqiForm({ lecturer, course, faculty, semester, existing, completion, onSaved }) {
+  // ✅ lessonPlan state is NOW inside CqiForm where it's used
+  const [lessonPlan, setLessonPlan] = useState(existing?.lessonPlan || defaultLessonPlan(semester))
+  
   const [clos, setClos] = useState(existing?.clos || [
     { clo: 'CLO 1', target: 70, actual: '' },
     { clo: 'CLO 2', target: 70, actual: '' },
@@ -161,7 +164,17 @@ function CqiForm({ lecturer, course, faculty, semester, existing, completion, on
 
   const handleSave = async () => {
     setSaving(true)
-    const r = await saveCqi({ lecturerId: lecturer.staffId || lecturer.id, courseCode: course.code, facultyCode: faculty.code, semester, clos, strengths, weaknesses, actions })
+    const r = await saveCqi({
+      lecturerId: lecturer.staffId || lecturer.id,
+      courseCode: course.code,
+      facultyCode: faculty.code,
+      semester,
+      clos,
+      strengths,
+      weaknesses,
+      actions,
+      lessonPlan,  // ✅ Now lessonPlan is defined in this scope
+    })
     setSaving(false)
     setToast(r.success ? '✅ CQI ' + r.action : '❌ ' + r.error)
     if (r.success) onSaved?.()
@@ -212,6 +225,9 @@ function CqiForm({ lecturer, course, faculty, semester, existing, completion, on
           <textarea value={actions} onChange={(e) => setActions(e.target.value)} rows={3} style={{ ...inp, width: '100%' }} />
         </Field>
       </div>
+
+      {/* ✅ LessonPlanForm with correct state */}
+      <LessonPlanForm lp={lessonPlan} onChange={setLessonPlan} course={course} lecturer={lecturer} semester={semester} />
 
       <button onClick={handleSave} disabled={saving} style={{ padding: '12px 28px', background: saving ? '#9ca3af' : '#059669', color: '#fff', border: 'none', borderRadius: '8px', fontSize: '14px', fontWeight: '600', cursor: 'pointer' }}>
         {saving ? '⏳ Saving...' : '💾 Save CQI'}
